@@ -80,5 +80,4 @@ public class ExemplairePK implements Serializable {
     public String toString() {
         return "com.projet.entites.ExemplairePK[ isbn=" + isbn + ", numero=" + numero + " ]";
     }
-    
 }
