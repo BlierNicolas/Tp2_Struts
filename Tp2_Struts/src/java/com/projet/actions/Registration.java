@@ -7,11 +7,10 @@ import org.apache.struts2.interceptor.SessionAware;
 import com.projet.dao.userDAO;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.projet.entites.user;
 
 public class Registration extends ActionSupport implements SessionAware {
 
-    userDAO userDAO = new userDAO(Connexion.getInstance());
+    userDAO unUserDAO = new userDAO();
     private Map<String, Object> session;
     private String username, password;
 
@@ -25,9 +24,8 @@ public class Registration extends ActionSupport implements SessionAware {
     {
         if (username==null)
             return INPUT;
-        user unUser = new user(username, "", password);
-        if (userDAO.create(unUser))
-            return SUCCESS;
+//        if (userDAO.addUser(username, password))
+//            return SUCCESS;
         return INPUT;
     }
 
@@ -55,5 +53,5 @@ public class Registration extends ActionSupport implements SessionAware {
     public void setPassword(String password) {
         this.password = password;
     }
-
+	
 }

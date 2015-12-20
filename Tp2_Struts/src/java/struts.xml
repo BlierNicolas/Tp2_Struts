@@ -12,14 +12,6 @@
 
         <default-action-ref name="index" />
 
-        <global-results>
-            <result name="error">/error.jsp</result>
-        </global-results>
-
-        <global-exception-mappings>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
-        </global-exception-mappings>
-
         <action name="index">
             <result>/login.jsp</result>
         </action>

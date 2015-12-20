@@ -6,66 +6,59 @@ import java.util.Map;
 import org.apache.struts2.interceptor.SessionAware;
 
 import com.projet.dao.livreDAO;
+import com.projet.entites.Livre;
 import com.opensymphony.xwork2.ActionSupport;
-import com.projet.dao.evaluationDAO;
-import com.projet.entites.evaluation;
-import com.projet.entites.livre;
 
 public class BookAction extends ActionSupport implements SessionAware {
 
-    private Map<String, Object> session;
-    private List<livre> ListeLivre ;//= LivreDAO.getBookList();
-    private livre unLivre ;//= new Book();
-    private List<String> commentaires;
-    private String unCommentaire;
-    private livreDAO unLivreDAO = new livreDAO(Connexion.getInstance());
-    private evaluationDAO uneEvaluationDAO = new evaluationDAO(Connexion.getInstance());
+	private Map<String, Object> session;
+	private List<Livre> LivreList ;//= LivreDAO.getBookList();
+	private Livre livre ;//= new Book();
+	private List<String> commentaires;
+	private String unCommentaire;
+	
+	@Override
+	public void setSession(Map<String, Object> s) {
+            // TODO Auto-generated method stub
+            session = s;
+	}
 
-    @Override
-    public void setSession(Map<String, Object> s) {
-        // TODO Auto-generated method stub
-        session = s;
-    }
+	public String list()
+	{
+     //   if (!session.containsKey("connecte"))
+     //   	return INPUT;
 
-    public String list()
-    {
- //   if (!session.containsKey("connecte"))
- //   	return INPUT;
-        ListeLivre = unLivreDAO.findAll();
-        return SUCCESS;
-    }
-    public String add()
-    {
-        if (unLivre!=null)
-        {
-            if (unLivre.getISBN().trim().equals(""))
+            LivreList = livreDAO.getLivreList();
+            return SUCCESS;
+	}
+	public String add()
+	{
+            if (livre!=null)
             {
-                this.addFieldError("livre.isbn", "L'ISBN est obligatoire");
-                return SUCCESS;
+                if (livre.getIsbn().trim().equals(""))
+                {
+                    this.addFieldError("livre.isbn", "L'ISBN est obligatoire");
+                    return SUCCESS;
+                }
+                if (livreDAO.addBook(livre))
+                {
+                    this.addActionMessage("Livre ajoute avec succes.");
+                }
+                else
+                {
+                    this.addActionMessage("L'ISBN existe deja.");
+                }
             }
-            if (unLivreDAO.create(unLivre))
-            {
-                this.addActionMessage("Livre ajoute avec succes.");
-            }
-            else
-            {
-                this.addActionMessage("L'ISBN existe deja.");
-            }
-        }
-        return SUCCESS;
-    }
+            return SUCCESS;
+	}
     public String comment()
     {
         if (unCommentaire != null)
         {
-            evaluation uneEvaluation = new evaluation((String)session.get("username"), unLivre.getISBN(), 0, unCommentaire);
-            uneEvaluationDAO.create(uneEvaluation);
+            livreDAO.addComment(livre.getIsbn(), unCommentaire);
         }
-        unLivre = unLivreDAO.read(unLivre.getISBN());
-        List<evaluation> uneListeEvaluations = uneEvaluationDAO.findAll();
-        for (int i=0; i<uneListeEvaluations.size();i++) {
-            commentaires.add(uneListeEvaluations.get(i).getCommentaire());
-        }
+        livre = livreDAO.getBook(livre.getIsbn());
+        commentaires = livreDAO.getComments(livre.getIsbn());
         return SUCCESS;
     }
 
@@ -76,20 +69,20 @@ public class BookAction extends ActionSupport implements SessionAware {
             this.addActionError("Vous devez vous connecter pour accéder aux infos sur les livres");
     }
 
-    public List<livre> getBookList() {
-        return ListeLivre;
+    public List<Livre> getBookList() {
+        return LivreList;
     }
 
-    public void setBookList(List<livre> uneListeLivre) {
-        this.ListeLivre = uneListeLivre;
+    public void setBookList(List<Livre> bookList) {
+        this.LivreList = bookList;
     }
 
-    public livre getLivre() {
-        return unLivre;
+    public Livre getLivre() {
+        return livre;
     }
 
-    public void setLivre(livre unLivre) {
-        this.unLivre = unLivre;
+    public void setLivre(Livre livre) {
+        this.livre = livre;
     }
 
     public List<String> getCommentaires() {
@@ -107,5 +100,5 @@ public class BookAction extends ActionSupport implements SessionAware {
     public void setUnCommentaire(String unCommentaire) {
         this.unCommentaire = unCommentaire;
     }	
-	
+
 }

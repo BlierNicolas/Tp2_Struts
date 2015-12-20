@@ -6,7 +6,7 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import com.projet.dao.userDAO;
 import com.opensymphony.xwork2.ActionSupport;
-import com.projet.entites.user;
+import com.projet.entites.User;
 
 public class Authentification extends ActionSupport implements SessionAware {
 
@@ -21,12 +21,9 @@ public class Authentification extends ActionSupport implements SessionAware {
 
     public String login()
     {
-        userDAO unUserDAO = new userDAO(Connexion.getInstance());
-        user unUser = unUserDAO.read(username);
-        if (unUser != null)
+        if (userDAO.checkLogin(username, password))
         {
             session.put("connecte", true);
-            session.put("username", username);
             return SUCCESS;
         }
         return INPUT;

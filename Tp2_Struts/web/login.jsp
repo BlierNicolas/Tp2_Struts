@@ -27,10 +27,12 @@
  	  <s:textfield name="username" label="%{getText('username')}" required="true" />
  	  <s:textfield name="password" label="%{getText('password')}" required="true" />
   	  <s:submit value="Log in"/>   	  
-</s:form>	
+</s:form>
+<ul>
     <li>
         <s:url id="url" action="Register" />
         <s:a href="%{url}"><s:text name="Form.registration.title" /></s:a>
     </li>
+</ul>
 </body>
 </html>
