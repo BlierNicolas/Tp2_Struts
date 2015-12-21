@@ -45,18 +45,20 @@ public class BookAction extends ActionSupport implements SessionAware {
                     this.addFieldError("livre.isbn", "L'ISBN est obligatoire");
                     return SUCCESS;
                 }
- 
-                String str;
-                str = livre.getNomAuteur();
-                char[] cs = str.toCharArray();
-                for(int i = 0; i< cs.length; i++)
-                {
-                    if(Character.isDigit(cs[i]))
+                
+                    String str;
+                    str = livre.getNomAuteur();
+                    char[] cs = str.toCharArray();
+                    for(int i = 0; i< cs.length; i++)
                     {
-                        this.addActionMessage("Le nom d'auteur ne doit pas contenir de chiffre!");
+                        if(Character.isDigit(cs[i]))
+                        {
+                            this.addActionMessage("Le nom d'auteur ne doit pas contenir de chiffre!");
+                            return SUCCESS;
+                        }    
                     }
-                    return SUCCESS;    
-                }
+                
+     
                 if (livreDAO.addBook(livre)) {
                     this.addActionMessage("Livre ajoute avec succes.");
                 } else {
