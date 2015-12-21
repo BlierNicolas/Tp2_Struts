@@ -15,7 +15,6 @@ import javax.persistence.Query;
 
 public class evaluationcoursDAO {
     private static List<Evaluationcours> ListeEvaluationcours = new LinkedList<Evaluationcours>();
-    private static Map<String,List<String>> comments = new HashMap<String,List<String>>();
 
     private static EntityManagerFactory emf;
     private static EntityManager em;
@@ -51,9 +50,9 @@ public class evaluationcoursDAO {
         if (ListeEvaluationcours.contains(ec))
             return false;
         ListeEvaluationcours.add(ec);
-        em.getTransaction().begin();
-        em.persist(ec);
-        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        em.persist(ec);
+//        em.getTransaction().commit();
         return true;
     }
 }

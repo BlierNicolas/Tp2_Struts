@@ -14,7 +14,6 @@ import javax.persistence.Query;
 
 public class evaluationDAO {
     private static List<Evaluation> ListeEvaluation = new LinkedList<Evaluation>();
-    private static Map<String,List<String>> comments = new HashMap<String,List<String>>();
 
     private static EntityManagerFactory emf;
     private static EntityManager em;
@@ -36,7 +35,7 @@ public class evaluationDAO {
 //        LivreList = query.getResultList();
     }
 
-    public static List<Evaluation> getListeCours() {
+    public static List<Evaluation> getListeEvaluation() {
             return ListeEvaluation;
     }
     public static Evaluation getEvaluation(int id) {
@@ -54,9 +53,9 @@ public class evaluationDAO {
         if (ListeEvaluation.contains(e))
             return false;
         ListeEvaluation.add(e);
-        em.getTransaction().begin();
-        em.persist(e);
-        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        em.persist(e);
+//        em.getTransaction().commit();
         return true;
     }
 }

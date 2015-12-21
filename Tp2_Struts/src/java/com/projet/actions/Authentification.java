@@ -23,6 +23,7 @@ public class Authentification extends ActionSupport implements SessionAware {
     {
         if (userDAO.checkLogin(username, password))
         {
+            session.put("username", username);
             session.put("connecte", true);
             return SUCCESS;
         }
@@ -30,6 +31,7 @@ public class Authentification extends ActionSupport implements SessionAware {
     }
     public String logout()
     {
+        session.remove("username");
         session.remove("connecte");
         session.clear();
         return SUCCESS;

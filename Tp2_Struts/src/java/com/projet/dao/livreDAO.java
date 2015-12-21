@@ -14,7 +14,6 @@ import javax.persistence.Query;
 
 public class livreDAO {
     private static List<Livre> LivreList = new LinkedList<Livre>();
-    private static Map<String,List<String>> comments = new HashMap<String,List<String>>();
 
     private static EntityManagerFactory emf;
     private static EntityManager em;
@@ -64,25 +63,9 @@ public class livreDAO {
         if (LivreList.contains(l))
             return false;
         LivreList.add(l);
-        em.getTransaction().begin();
-        em.persist(l);
-        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        em.persist(l);
+//        em.getTransaction().commit();
         return true;
-    }
-
-    public static List<String> getComments(String isbn) {
-        return comments.get(isbn);
-    }
-    public static void addComment(String isbn, String comment) {
-        if (comments.containsKey(isbn))
-        {
-            comments.get(isbn).add(comment);
-        }
-        else
-        {
-            List<String> l = new LinkedList<String>();
-            l.add(comment);
-            comments.put(isbn, l);
-        }
     }
 }

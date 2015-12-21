@@ -15,7 +15,6 @@ import javax.persistence.Query;
 
 public class exemplaireDAO {
     private static List<Exemplaire> ListeExemplaire = new LinkedList<Exemplaire>();
-    private static Map<String,List<String>> comments = new HashMap<String,List<String>>();
 
     private static EntityManagerFactory emf;
     private static EntityManager em;
@@ -47,9 +46,9 @@ public class exemplaireDAO {
         if (ListeExemplaire.contains(ex))
             return false;
         ListeExemplaire.add(ex);
-        em.getTransaction().begin();
-        em.persist(ex);
-        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        em.persist(ex);
+//        em.getTransaction().commit();
         return true;
     }
 }

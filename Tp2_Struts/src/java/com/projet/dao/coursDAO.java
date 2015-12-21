@@ -14,7 +14,6 @@ import javax.persistence.Query;
 
 public class coursDAO {
     private static List<Cours> ListeCours = new LinkedList<Cours>();
-    private static Map<String,List<String>> comments = new HashMap<String,List<String>>();
 
     private static EntityManagerFactory emf;
     private static EntityManager em;
@@ -58,9 +57,9 @@ public class coursDAO {
         if (ListeCours.contains(c))
             return false;
         ListeCours.add(c);
-        em.getTransaction().begin();
-        em.persist(c);
-        em.getTransaction().commit();
+//        em.getTransaction().begin();
+//        em.persist(c);
+//        em.getTransaction().commit();
         return true;
     }
 }
