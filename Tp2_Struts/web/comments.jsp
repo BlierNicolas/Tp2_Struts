@@ -12,11 +12,14 @@
 <h3>MyBooKs manager</h3>
 <s:include value="menu.jsp"></s:include>	
 <h4>Commentaires du livre <s:property value="livre.isbn" />[<s:property value="livre.titre" />] </h4>
-<ul>
-	<s:iterator value="ListeEvaluation">
-         <li><s:property /></li>
+<table>
+	<s:iterator value="evaluation">
+            <tr>
+                <td><s:property value="note"/> </td>
+                <td><s:property value="commentaire"/> </td>>
+            </tr>
 	</s:iterator>
-</ul>
+</table>
 
 <s:form action="Evaluer">
  	 
@@ -37,7 +40,14 @@ Ajouter une note :
 Ajoutez un commentaire :
  <s:textfield name="unCommentaire" label="Commentaire" required="true" />
  <s:hidden name="livre.isbn" />
+ 
 
+     <select name="listeCours" required="true">
+         <option> General </option>
+         
+         <s:iterator value="ListeCours">
+         <option><s:property value="numero"/> </option>
+         </s:iterator>
 <s:submit value="Go"/>   	  
 </s:form>
 </body>

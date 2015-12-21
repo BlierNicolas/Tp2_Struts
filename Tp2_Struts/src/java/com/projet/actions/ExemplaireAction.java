@@ -42,27 +42,28 @@ public class ExemplaireAction extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
     public String addExemplaire() {
-        exemplairePK.setIsbn(unIsbn);
-        System.out.println("test1");
-        exemplairePK.setNumero((short)unNumero);
-        System.out.println("test2");
+       
+      
+     
+       
         if (exemplairePK!=null) {
-        System.out.println("test3");
+   
             if (exemplairePK.getIsbn().trim().equals("")) {
-        System.out.println("test3.1");
+   
                 this.addFieldError("exemplairePK.isbn", "L'ISBN est obligatoire");
                 return SUCCESS;
             }
             if (unProprietaire.equals("")) {
-        System.out.println("test3.2");
+     
                 this.addFieldError("exemplaire.proprietaire", "Le nom du propriétaire est obligatoire");
                 return SUCCESS;
             }
-        System.out.println("test4");
+       
             exemplaire.setProprietaire(unProprietaire);
-        System.out.println("test5");
+            if(unDetenteur == null)
+                exemplaire.setDetenteur(unProprietaire);
             exemplaire.setDetenteur(unDetenteur);
-        System.out.println("test6");
+     
             if (exemplaireDAO.addExemplaire(exemplaire)) {
                 this.addActionMessage("L'exemplaire a ete ajoute avec succes.");
             } else {

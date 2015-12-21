@@ -30,9 +30,29 @@
 	        <s:a href="%{url}">Evaluer</s:a>
          </td>
      </tr>
+     
+</s:iterator>
+    <s:url id="url" action="AddLivre" />
+    <s:a href="%{url}">Ajouter un livre</s:a>
+</table>
+
+
+
+<h4>Liste d'exemplaire</h4>
+<table border="1" cellspacing="0">
+     <tr>
+         <th>ExemplairePK</th>
+         <th>Proprietaire</th>
+         <th>Detenteur</th>
+     </tr>
+<s:iterator value="ListeExemplaire">
+     <tr>
+         <td><s:property value="exemplairePK" /></td>
+         <td><s:property value="proprietaire" /></td>
+         <td><s:property value="detenteur" /></td>
+     </tr>
 </s:iterator>
 </table>
-<s:url id="url" action="AddBook" />
-<s:a href="%{url}">Ajouter un livre</s:a>
+
 </body>
 </html>

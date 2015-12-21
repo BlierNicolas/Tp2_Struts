@@ -23,7 +23,11 @@
             <result>/list.jsp</result>
             <result name="input">/login.jsp</result>
         </action>
-        <action name="AddLivre" method="add" class="com.projet.actions.BookAction">
+        <action name="ListExemplaire" method="list" class="com.projet.actions.ExemplaireAction">
+            <result>/list.jsp</result>
+            <result name="input">/login.jsp</result>
+        </action>
+    <action name="AddLivre" method="add" class="com.projet.actions.BookAction">
             <result>/add.jsp</result>
         </action>
         <action name="AddExemplaire" method="addExemplaire" class="com.projet.actions.ExemplaireAction">

@@ -13,7 +13,7 @@
 <s:include value="menu.jsp"></s:include>	
 Ajoutez un nouveau livre :
 <s:actionmessage/>
-<s:form action="AddBook">
+<s:form action="AddLivre">
         <s:textfield name="livre.isbn" label="ISBN" required="true" />
         <s:textfield name="livre.Titre" label="Titre" />
         <s:textfield name="livre.NomAuteur" label="Auteur" />
