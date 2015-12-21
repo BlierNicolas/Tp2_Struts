@@ -21,8 +21,8 @@
 <s:form action="Evaluer">
  	 
 Ajouter une note : 
-    <select required= ="true">
-        <option>0</option>
+    <select required>
+        <option selected>0</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>

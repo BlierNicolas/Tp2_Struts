@@ -45,7 +45,7 @@ public class livreDAO {
 //        LivreList = query.getResultList();
     }
 
-    public static List<Livre> getLivreList() {
+    public static List<Livre> getListeLivre() {
             return LivreList;
     }
     public static Livre getBook(String isbn) {

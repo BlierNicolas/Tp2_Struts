@@ -20,18 +20,12 @@ public class coursDAO {
     private static Query query;
     
     static {
-        Cours cours1 = new Cours("420-AW6-RO", "Développement de projets informatiques", 90);
-        Cours cours2 = new Cours("420-AV4-RO", "Conception d'applications hypermédias", 60);
-        Cours cours3 = new Cours("420-AX4-RO", "Développement en environnement graphique", 60);
-        Cours cours4 = new Cours("420-353-RO", "Programmation réseau", 45);
-        Cours cours5 = new Cours("420-026-RO", "Programmation structurée", 90);
-        Cours cours6 = new Cours("420-046-RO", "Programmation orientée objets", 90);
-        ListeCours.add(cours1);
-        ListeCours.add(cours2);
-        ListeCours.add(cours3);
-        ListeCours.add(cours4);
-        ListeCours.add(cours5);
-        ListeCours.add(cours6);
+        ListeCours.add(new Cours("420-AW6-RO", "Développement de projets informatiques", 90));
+        ListeCours.add(new Cours("420-AV4-RO", "Conception d'applications hypermédias", 60));
+        ListeCours.add(new Cours("420-AX4-RO", "Développement en environnement graphique", 60));
+        ListeCours.add(new Cours("420-353-RO", "Programmation réseau", 45));
+        ListeCours.add(new Cours("420-026-RO", "Programmation structurée", 90));
+        ListeCours.add(new Cours("420-046-RO", "Programmation orientée objets", 90));
         
 //        emf = Persistence.createEntityManagerFactory("Tp2_StrutsPU");
 //        em = emf.createEntityManager();

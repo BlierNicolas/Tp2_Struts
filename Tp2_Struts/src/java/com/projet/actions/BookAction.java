@@ -12,81 +12,87 @@ import com.projet.dao.evaluationDAO;
 import com.projet.dao.evaluationcoursDAO;
 import com.projet.entites.Evaluation;
 import com.projet.entites.Evaluationcours;
+import static java.lang.System.out;
 
 public class BookAction extends ActionSupport implements SessionAware {
 
-	private Map<String, Object> session;
-	private List<Livre> ListeLivre ;//= LivreDAO.getBookList();
-	private Livre livre ;//= new Book();
-	private List<Evaluation> ListeEvaluation;
-	private List<Evaluationcours> ListeEvaluationcours;
-	private String unCommentaire;
-        private int uneNote;
-        private String unCours;
-	
-	@Override
-	public void setSession(Map<String, Object> s) {
-            // TODO Auto-generated method stub
-            session = s;
-	}
+    private Map<String, Object> session;
+    private List<Livre> ListeLivre;
+    private Livre livre;
+    private List<Evaluation> ListeEvaluation;
+    private List<Evaluationcours> ListeEvaluationcours;
+    private String unCommentaire;
+    private int uneNote;
+    private String unCours;
 
-	public String list()
-	{
-     //   if (!session.containsKey("connecte"))
-     //   	return INPUT;
+    @Override
+    public void setSession(Map<String, Object> s) {
+        // TODO Auto-generated method stub
+        session = s;
+    }
 
-            ListeLivre = livreDAO.getLivreList();
-            return SUCCESS;
-	}
-        public String add() {
-            if (livre!=null) 
+    public String list()
+    {
+//    if (!session.containsKey("connecte"))
+//        return INPUT;
+        ListeLivre = livreDAO.getListeLivre();
+        ListeEvaluation = evaluationDAO.getListeEvaluation();
+        ListeEvaluationcours = evaluationcoursDAO.getListeEvaluationcours();
+        return SUCCESS;
+    }
+    public String add() {
+        if (livre!=null) {
+            if (livre.getIsbn().trim().equals("")) {
+                this.addFieldError("livre.isbn", "L'ISBN est obligatoire");
+                return SUCCESS;
+            }
+            String str;
+            str = livre.getNomAuteur();
+            char[] cs = str.toCharArray();
+            for(int i = 0; i< cs.length; i++)
             {
-                if (livre.getIsbn().trim().equals("")) {
-                    this.addFieldError("livre.isbn", "L'ISBN est obligatoire");
+                if(Character.isDigit(cs[i]))
+                {
+                    this.addActionMessage("Le nom d'auteur ne doit pas contenir de chiffre!");
                     return SUCCESS;
-                }
-                
-                    String str;
-                    str = livre.getNomAuteur();
-                    char[] cs = str.toCharArray();
-                    for(int i = 0; i< cs.length; i++)
-                    {
-                        if(Character.isDigit(cs[i]))
-                        {
-                            this.addActionMessage("Le nom d'auteur ne doit pas contenir de chiffre!");
-                            return SUCCESS;
-                        }    
-                    }
-                
-     
-                if (livreDAO.addBook(livre)) {
-                    this.addActionMessage("Livre ajoute avec succes.");
-                } else {
-                    this.addActionMessage("L'ISBN existe deja.");
-                }
+                }    
             }
-            return SUCCESS;
-        }
-        public String evaluer() {
-            int id = ListeEvaluation.size();
-            if ((unCommentaire != null) && (uneNote >= 0) && (uneNote <= 10)) {
-                Evaluation e = new Evaluation(id, (String)session.get("username"), livre.getIsbn(), (short)uneNote, unCommentaire);
-                evaluationDAO.addEvaluation(e);
+            if (livreDAO.addBook(livre)) {
+                this.addActionMessage("Livre ajoute avec succes.");
+            } else {
+                this.addActionMessage("L'ISBN existe deja.");
             }
-            livre = livreDAO.getBook(livre.getIsbn());
-            ListeEvaluation = evaluationDAO.getListeEvaluation();
-            return SUCCESS;
         }
-        public String evaluercours() {
-            int id = ListeEvaluation.size();
-            if ((unCommentaire != null) && (uneNote >= 0) && (uneNote <= 10) && (unCours != null)) {
-                Evaluationcours ec = new Evaluationcours(id, livre.getIsbn(), (String)session.get("username"), unCours, (short)uneNote, unCommentaire);
-                evaluationcoursDAO.addEvaluationcours(ec);
-            }
-            livre = livreDAO.getBook(livre.getIsbn());
-            ListeEvaluationcours = evaluationcoursDAO.getListeEvaluationcours();
-            return SUCCESS;
+        return SUCCESS;
+    }
+    public String evaluer() {
+        System.out.println("test1");
+        if ((unCommentaire != null) && (uneNote >= 0) && (uneNote <= 10)) {
+            System.out.println("test1.1");
+            //System.out.println("1 " + ListeEvaluation.size());
+            //int id = ListeEvaluation.size();
+            Evaluation e = new Evaluation(10, (String)session.get("username"), livre.getIsbn(), (short)uneNote, unCommentaire);
+            System.out.println("test1.3");
+            evaluationDAO.addEvaluation(e);
         }
+            System.out.println("test2.1");
+        livre = livreDAO.getBook(livre.getIsbn());
+            System.out.println("test2.2");
+        ListeEvaluation = evaluationDAO.getListeEvaluation();
+            System.out.println(ListeEvaluation.get(0).getId());
+            System.out.println("test2.3");
+        return SUCCESS;
+    }
+    public String evaluercours() {
+        int id = ListeEvaluationcours.size();
+        if ((unCommentaire != null) && (uneNote >= 0) && (uneNote <= 10) && (unCours != null)) {
+            Evaluationcours ec = new Evaluationcours(id, livre.getIsbn(), (String)session.get("username"), unCours, (short)uneNote, unCommentaire);
+            evaluationcoursDAO.addEvaluationcours(ec);
+        }
+        livre = livreDAO.getBook(livre.getIsbn());
+        ListeEvaluationcours = evaluationcoursDAO.getListeEvaluationcours();
+        return SUCCESS;
+    }
 
     
     public void validate()

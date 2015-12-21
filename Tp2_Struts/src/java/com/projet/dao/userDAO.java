@@ -25,16 +25,11 @@ public class userDAO {
     private static Query query;
     
     static {
-        User user1 = new User("adupont", "Alain Dupont", "dupont");
-        User user2 = new User("sduvet", "Sylvie Duvet", "duvet");
-        User user3 = new User("alopointe", "Ali Lapointe", "lapointe");
-        User user4 = new User("jmarois", "Jean Marois", "marois");
-        User user5 = new User("pcharest", "Pauline Charest", "charest");
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
+        users.add(new User("adupont", "Alain Dupont", "dupont"));
+        users.add(new User("sduvet", "Sylvie Duvet", "duvet"));
+        users.add(new User("alopointe", "Ali Lapointe", "lapointe"));
+        users.add(new User("jmarois", "Jean Marois", "marois"));
+        users.add(new User("pcharest", "Pauline Charest", "charest"));
         
 //        emf = Persistence.createEntityManagerFactory("Tp2_StrutsPU");
 //        em = emf.createEntityManager();
