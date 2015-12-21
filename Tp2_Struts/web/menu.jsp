@@ -11,12 +11,16 @@ a:hover {color : red;}
 <s:if test="#session['connecte']">
 <ul id="menu">
     <li>
-        <s:url id="url" action="ListBooks" />
+        <s:url id="url" action="ListLivre" />
         <s:a href="%{url}">Liste des livres</s:a>
     </li>
     <li>
-        <s:url id="url" action="AddBook" />
+        <s:url id="url" action="AddLivre" />
         <s:a href="%{url}">Ajouter un livre</s:a>
+    </li>
+    <li>
+        <s:url id="url" action="AddExemplaire" />
+        <s:a href="%{url}">Ajouter un exemplaire</s:a>
     </li>
     <li>
         <s:url id="url" action="Logout" />
