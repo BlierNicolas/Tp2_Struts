@@ -20,6 +20,7 @@ public class BookAction extends ActionSupport implements SessionAware {
     private List<Livre> ListeLivre;
     private Livre livre;
     private List<Evaluation> ListeEvaluation;
+    private Evaluation evaluation;
     private List<Evaluationcours> ListeEvaluationcours;
     private String unCommentaire;
     private int uneNote;
@@ -36,8 +37,6 @@ public class BookAction extends ActionSupport implements SessionAware {
 //    if (!session.containsKey("connecte"))
 //        return INPUT;
         ListeLivre = livreDAO.getListeLivre();
-        ListeEvaluation = evaluationDAO.getListeEvaluation();
-        ListeEvaluationcours = evaluationcoursDAO.getListeEvaluationcours();
         return SUCCESS;
     }
     public String add() {
@@ -66,21 +65,15 @@ public class BookAction extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
     public String evaluer() {
-        System.out.println("test1");
+        int id = 10;
         if ((unCommentaire != null) && (uneNote >= 0) && (uneNote <= 10)) {
-            System.out.println("test1.1");
-            //System.out.println("1 " + ListeEvaluation.size());
             //int id = ListeEvaluation.size();
-            Evaluation e = new Evaluation(10, (String)session.get("username"), livre.getIsbn(), (short)uneNote, unCommentaire);
-            System.out.println("test1.3");
+            Evaluation e = new Evaluation(id, (String)session.get("username"), livre.getIsbn(), (short)uneNote, unCommentaire);
             evaluationDAO.addEvaluation(e);
         }
-            System.out.println("test2.1");
         livre = livreDAO.getBook(livre.getIsbn());
-            System.out.println("test2.2");
         ListeEvaluation = evaluationDAO.getListeEvaluation();
-            System.out.println(ListeEvaluation.get(0).getId());
-            System.out.println("test2.3");
+        evaluation = evaluationDAO.getEvaluation(id);
         return SUCCESS;
     }
     public String evaluercours() {
