@@ -14,7 +14,7 @@
 Ajoutez un nouveau livre :
 <s:actionmessage/>
 <s:form action="AddBook">
-        <s:textfield name="livre.ISBN" label="ISBN" required="true" />
+        <s:textfield name="livre.isbn" label="ISBN" required="true" />
         <s:textfield name="livre.Titre" label="Titre" />
         <s:textfield name="livre.NomAuteur" label="Auteur" />
         <s:hidden name="livre.description" value="Pas de description"/>

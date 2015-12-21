@@ -62,6 +62,7 @@ public class livreDAO {
     public static boolean addBook(Livre l) {
         if (LivreList.contains(l))
             return false;
+        
         LivreList.add(l);
 //        em.getTransaction().begin();
 //        em.persist(l);

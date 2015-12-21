@@ -18,16 +18,16 @@
          <th>Titre</th>
          <th>Auteur(s)</th>
      </tr>
-<s:iterator value="bookList">
+<s:iterator value="ListeLivreOrdonee">
      <tr>
          <td><s:property value="isbn" /></td>
          <td><s:property value="titre" /></td>
-         <td><s:property value="auteur" /></td>
+         <td><s:property value="nomAuteur" /></td>
          <td>
 	        <s:url id="url" action="CommentBook">
 	        <s:param name="livre.isbn"><s:property value="isbn" /></s:param>
 	        </s:url>
-	        <s:a href="%{url}">Commentaires</s:a>
+	        <s:a href="%{url}">Evaluer</s:a>
          </td>
      </tr>
 </s:iterator>

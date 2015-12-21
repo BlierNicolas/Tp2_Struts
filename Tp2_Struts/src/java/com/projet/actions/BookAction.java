@@ -39,10 +39,23 @@ public class BookAction extends ActionSupport implements SessionAware {
             return SUCCESS;
 	}
         public String add() {
-            if (livre!=null) {
+            if (livre!=null) 
+            {
                 if (livre.getIsbn().trim().equals("")) {
                     this.addFieldError("livre.isbn", "L'ISBN est obligatoire");
                     return SUCCESS;
+                }
+ 
+                String str;
+                str = livre.getNomAuteur();
+                char[] cs = str.toCharArray();
+                for(int i = 0; i< cs.length; i++)
+                {
+                    if(Character.isDigit(cs[i]))
+                    {
+                        this.addActionMessage("Le nom d'auteur ne doit pas contenir de chiffre!");
+                    }
+                    return SUCCESS;    
                 }
                 if (livreDAO.addBook(livre)) {
                     this.addActionMessage("Livre ajoute avec succes.");
@@ -126,6 +139,16 @@ public class BookAction extends ActionSupport implements SessionAware {
     
     public void setUneNote(int uneNote) {
         this.uneNote = uneNote;
+    }
+    
+    public String getUncours()
+    {
+        return unCours;
+    }
+    
+    public void setUnCours(String unCours)
+    {
+        this.unCours = unCours;
     }
 
 }

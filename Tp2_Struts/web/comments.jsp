@@ -13,15 +13,32 @@
 <s:include value="menu.jsp"></s:include>	
 <h4>Commentaires du livre <s:property value="livre.isbn" />[<s:property value="livre.titre" />] </h4>
 <ul>
-	<s:iterator value="commentaires">
+	<s:iterator value="ListeEvaluation">
          <li><s:property /></li>
 	</s:iterator>
 </ul>
+
+<s:form action="Evaluer">
+ 	 
+Ajouter une note : 
+    <select required= ="true">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+    </select> <br> <br>
 Ajoutez un commentaire :
-<s:form action="CommentBook">
- 	  <s:textfield name="unCommentaire" label="Commentaire" required="true" />
- 	  <s:hidden name="livre.isbn" />
-  	  <s:submit value="Go"/>   	  
-</s:form>	
+ <s:textfield name="unCommentaire" label="Commentaire" required="true" />
+ <s:hidden name="livre.isbn" />
+
+<s:submit value="Go"/>   	  
+</s:form>
 </body>
 </html>
