@@ -2,6 +2,7 @@ package com.projet.dao;
 
 import com.projet.entites.Cours;
 import com.projet.entites.Exemplaire;
+import com.projet.entites.ExemplairePK;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,21 @@ public class exemplaireDAO {
     private static Query query;
     
     static {
+        ExemplairePK ExemplairePK1 = new ExemplairePK();
+        ExemplairePK ExemplairePK2 = new ExemplairePK();
+        ExemplairePK ExemplairePK3 = new ExemplairePK();
+        
+        
+        Exemplaire exemplaire1 = new Exemplaire(ExemplairePK1,"Moumene","Djibo");
+        Exemplaire exemplaire2 = new Exemplaire(ExemplairePK2,"Gailloux","Bousquet");
+        Exemplaire exemplaire3 = new Exemplaire(ExemplairePK3,"Elena","Junka");
+       
+        ListeExemplaire.add(exemplaire1);
+        ListeExemplaire.add(exemplaire2);
+        ListeExemplaire.add(exemplaire3);
+     
+        
+        
         
 //        emf = Persistence.createEntityManagerFactory("Tp2_StrutsPU");
 //        em = emf.createEntityManager();
