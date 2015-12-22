@@ -29,6 +29,7 @@ a:hover {color : red;}
 </ul>
 </s:if>
 <s:else>
+    
 <ul>
     <li>
         <s:url id="url" action="Login" />
