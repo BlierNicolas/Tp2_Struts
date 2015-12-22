@@ -42,12 +42,12 @@ Ajoutez un commentaire :
  <s:hidden name="livre.isbn" />
  
 
-     <select name="listeCours" required="true">
-         <option> General </option>
-         
+     <select name="unCours">
+         <option>General</option>
          <s:iterator value="ListeCours">
          <option><s:property value="numero"/> </option>
          </s:iterator>
+     </select>
 <s:submit value="Go"/>   	  
 </s:form>
 </body>
