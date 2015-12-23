@@ -1,4 +1,9 @@
-package com.projet.entites; 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.entites;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -15,6 +20,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Nicolas
+ */
 @Entity
 @Table(name = "evaluation")
 @XmlRootElement
@@ -25,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Evaluation.findByIdLivre", query = "SELECT e FROM Evaluation e WHERE e.idLivre = :idLivre"),
     @NamedQuery(name = "Evaluation.findByNote", query = "SELECT e FROM Evaluation e WHERE e.note = :note")})
 public class Evaluation implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,8 +69,7 @@ public class Evaluation implements Serializable {
         this.id = id;
     }
 
-    public Evaluation(Integer id, String idProf, String idLivre, short note, String commentaire) {
-        this.id = id;
+    public Evaluation(String idProf, String idLivre, short note, String commentaire) {
         this.idProf = idProf;
         this.idLivre = idLivre;
         this.note = note;

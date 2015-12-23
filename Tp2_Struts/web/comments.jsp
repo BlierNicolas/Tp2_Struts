@@ -13,7 +13,7 @@
 <s:include value="menu.jsp"></s:include>	
 <h4>Commentaires du livre <s:property value="livre.isbn" />[<s:property value="livre.titre" />] </h4>
 <table>
-	<s:iterator value="evaluation">
+	<s:iterator value="ListeEvaluationSpecifique">
             <tr>
                 <td><s:property value="note"/> </td>
                 <td><s:property value="commentaire"/> </td>>

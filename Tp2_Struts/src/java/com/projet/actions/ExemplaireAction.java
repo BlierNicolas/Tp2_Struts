@@ -5,17 +5,10 @@ import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.projet.dao.livreDAO;
-import com.projet.entites.Livre;
 import com.opensymphony.xwork2.ActionSupport;
-import com.projet.dao.evaluationDAO;
-import com.projet.dao.evaluationcoursDAO;
 import com.projet.dao.exemplaireDAO;
-import com.projet.entites.Evaluation;
-import com.projet.entites.Evaluationcours;
 import com.projet.entites.Exemplaire;
 import com.projet.entites.ExemplairePK;
-import static java.lang.System.out;
 
 public class ExemplaireAction extends ActionSupport implements SessionAware {
 
@@ -27,6 +20,7 @@ public class ExemplaireAction extends ActionSupport implements SessionAware {
     private int unNumero;
     private String unProprietaire;
     private String unDetenteur;
+    private exemplaireDAO unExemplaireDAO = new exemplaireDAO();
 
     @Override
     public void setSession(Map<String, Object> s) {
@@ -38,33 +32,25 @@ public class ExemplaireAction extends ActionSupport implements SessionAware {
     {
 //    if (!session.containsKey("connecte"))
 //        return INPUT;
-        ListeExemplaire = exemplaireDAO.getListeExemplaire();
+        ListeExemplaire = unExemplaireDAO.findAll();
         return SUCCESS;
     }
     public String addExemplaire() {
-       
-      
-     
-       
+//        if (unNumero != 0)
+//            exemplairePK = new ExemplairePK(unIsbn, (short)unNumero);
         if (exemplairePK!=null) {
-   
             if (exemplairePK.getIsbn().trim().equals("")) {
-   
                 this.addFieldError("exemplairePK.isbn", "L'ISBN est obligatoire");
                 return SUCCESS;
             }
-            if (unProprietaire.equals("")) {
-     
+            if (exemplaire.getProprietaire().trim().equals("")) {
                 this.addFieldError("exemplaire.proprietaire", "Le nom du propriétaire est obligatoire");
                 return SUCCESS;
             }
-       
-            exemplaire.setProprietaire(unProprietaire);
-            if(unDetenteur == null)
-                exemplaire.setDetenteur(unProprietaire);
-            exemplaire.setDetenteur(unDetenteur);
-     
-            if (exemplaireDAO.addExemplaire(exemplaire)) {
+            if(exemplaire.getDetenteur().trim().equals(""))
+                exemplaire.setDetenteur(exemplaire.getProprietaire());
+            exemplaire.setExemplairePK(exemplairePK);
+            if (unExemplaireDAO.add(exemplaire)) {
                 this.addActionMessage("L'exemplaire a ete ajoute avec succes.");
             } else {
                 this.addActionMessage("L'ISBN existe deja.");
@@ -73,8 +59,7 @@ public class ExemplaireAction extends ActionSupport implements SessionAware {
         return SUCCESS;
     }
     
-    public void validate()
-    {
+    public void validate() {
         if (!session.containsKey("connecte"))
             this.addActionError("Vous devez vous connecter pour accéder aux infos sur les livres");
     }
@@ -91,8 +76,16 @@ public class ExemplaireAction extends ActionSupport implements SessionAware {
         return exemplaire;
     }
 
-    public void setExemplaier(Exemplaire exemplaire) {
+    public void setExemplaire(Exemplaire exemplaire) {
         this.exemplaire = exemplaire;
+    }
+
+    public ExemplairePK getExemplairePK() {
+        return exemplairePK;
+    }
+
+    public void setExemplairePK(ExemplairePK exemplairePK) {
+        this.exemplairePK = exemplairePK;
     }
 
     public String getUnIsbn() {
@@ -119,13 +112,11 @@ public class ExemplaireAction extends ActionSupport implements SessionAware {
         this.unProprietaire = unProprietaire;
     }
     
-    public String getUnDetenteur()
-    {
+    public String getUnDetenteur() {
         return unDetenteur;
     }
     
-    public void setUnDetenteur(String unDetenteur)
-    {
+    public void setUnDetenteur(String unDetenteur) {
         this.unDetenteur = unDetenteur;
     }
 

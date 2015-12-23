@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Blier
+ * @author Nicolas
  */
 @Entity
 @Table(name = "cours")
@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Cours.findByNom", query = "SELECT c FROM Cours c WHERE c.nom = :nom"),
     @NamedQuery(name = "Cours.findByDuree", query = "SELECT c FROM Cours c WHERE c.duree = :duree")})
 public class Cours implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

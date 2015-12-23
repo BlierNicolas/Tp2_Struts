@@ -24,7 +24,7 @@ a:hover {color : red;}
     </li>
     <li>
         <s:url id="url" action="Logout" />
-        <s:a href="%{url}">Logout</s:a>
+        <s:a href="%{url}">Déconnexion</s:a>
     </li>
 </ul>
 </s:if>

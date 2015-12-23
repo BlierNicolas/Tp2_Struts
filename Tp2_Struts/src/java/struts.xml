@@ -19,7 +19,7 @@
             <result>/login.jsp</result>
             <result name="input">/register.jsp</result>
         </action>         
-        <action name="ListLivre" method="list" class="com.projet.actions.BookAction">
+        <action name="ListLivre" method="list" class="com.projet.actions.LivreAction">
             <result>/list.jsp</result>
             <result name="input">/login.jsp</result>
         </action>
@@ -27,13 +27,13 @@
             <result>/list.jsp</result>
             <result name="input">/login.jsp</result>
         </action>
-        <action name="AddLivre" method="add" class="com.projet.actions.BookAction">
+        <action name="AddLivre" method="add" class="com.projet.actions.LivreAction">
             <result>/add.jsp</result>
         </action>
         <action name="AddExemplaire" method="addExemplaire" class="com.projet.actions.ExemplaireAction">
             <result>/addExemplaire.jsp</result>
         </action>
-        <action name="Evaluer" method="evaluer" class="com.projet.actions.BookAction">
+        <action name="Evaluer" method="evaluer" class="com.projet.actions.LivreAction">
             <result>/comments.jsp</result>
         </action>
     </package>

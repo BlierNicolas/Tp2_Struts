@@ -1,4 +1,9 @@
-package com.projet.entites; 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.entites;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -13,11 +18,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Nicolas
+ */
 @Entity
 @Table(name = "livre")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Livre.findAll", query = "SELECT l FROM Livre l"),
+    @NamedQuery(name = "Livre.findAll", query = "SELECT l FROM Livre l ORDER BY l.note DESC"),
     @NamedQuery(name = "Livre.findByIsbn", query = "SELECT l FROM Livre l WHERE l.isbn = :isbn"),
     @NamedQuery(name = "Livre.findByTitre", query = "SELECT l FROM Livre l WHERE l.titre = :titre"),
     @NamedQuery(name = "Livre.findByEdition", query = "SELECT l FROM Livre l WHERE l.edition = :edition"),
@@ -29,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Livre.findByNote", query = "SELECT l FROM Livre l WHERE l.note = :note"),
     @NamedQuery(name = "Livre.findByNbEvaluations", query = "SELECT l FROM Livre l WHERE l.nbEvaluations = :nbEvaluations")})
 public class Livre implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)

@@ -14,10 +14,11 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Blier
+ * @author Nicolas
  */
 @Embeddable
 public class ExemplairePK implements Serializable {
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -80,4 +81,5 @@ public class ExemplairePK implements Serializable {
     public String toString() {
         return "com.projet.entites.ExemplairePK[ isbn=" + isbn + ", numero=" + numero + " ]";
     }
+    
 }

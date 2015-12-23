@@ -1,4 +1,9 @@
-package com.projet.entites; 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.projet.entites;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
@@ -12,6 +17,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Nicolas
+ */
 @Entity
 @Table(name = "exemplaire")
 @XmlRootElement
@@ -22,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Exemplaire.findByProprietaire", query = "SELECT e FROM Exemplaire e WHERE e.proprietaire = :proprietaire"),
     @NamedQuery(name = "Exemplaire.findByDetenteur", query = "SELECT e FROM Exemplaire e WHERE e.detenteur = :detenteur")})
 public class Exemplaire implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ExemplairePK exemplairePK;

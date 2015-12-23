@@ -12,7 +12,6 @@ import com.projet.dao.livreDAO;
 import com.projet.entites.Evaluation;
 import com.projet.entites.Evaluationcours;
 import com.projet.entites.Livre;
-import com.projet.entites.User;
 import java.util.List;
 
 public class Authentification extends ActionSupport implements SessionAware {
@@ -20,11 +19,12 @@ public class Authentification extends ActionSupport implements SessionAware {
     private Map<String, Object> session;
     private String username, password;
     private List<Livre> ListeLivre;
-    private Livre livre;
     private List<Evaluation> ListeEvaluation;
-    private Evaluation evaluation;
     private List<Evaluationcours> ListeEvaluationcours;
-    private Evaluationcours evaluationcours;
+    private userDAO unUserDAO = new userDAO();
+    private livreDAO unLivreDAO = new livreDAO();
+    private evaluationDAO uneEvaluationDAO = new evaluationDAO();
+    private evaluationcoursDAO uneEvaluationcoursDAO = new evaluationcoursDAO();
 
     @Override
     public void setSession(Map<String, Object> s) {
@@ -32,15 +32,14 @@ public class Authentification extends ActionSupport implements SessionAware {
         session = s;
     }
 
-    public String login()
-    {
-        if (userDAO.checkLogin(username, password))
-        {
+    public String login() {
+        if (unUserDAO.checkLogin(username, password)) {
             session.put("username", username);
             
-            ListeLivre = livreDAO.getListeLivre();
-            ListeEvaluation = evaluationDAO.getListeEvaluation();
-            ListeEvaluationcours = evaluationcoursDAO.getListeEvaluationcours();
+            //actualisation des données dans la db
+            ListeLivre = unLivreDAO.findAll();
+            ListeEvaluation = uneEvaluationDAO.findAll();
+            ListeEvaluationcours = uneEvaluationcoursDAO.findAll();
             for (int i=0; i<ListeLivre.size(); i++) {
                 double total = 0;
                 ListeLivre.get(i).setNbEvaluations(0);
@@ -58,6 +57,7 @@ public class Authentification extends ActionSupport implements SessionAware {
                         ListeLivre.get(i).setNote(total/ListeLivre.get(i).getNbEvaluations());
                     }
                 }
+                unLivreDAO.update(ListeLivre.get(i));
             }
             
             session.put("connecte", true);
@@ -65,8 +65,7 @@ public class Authentification extends ActionSupport implements SessionAware {
         }
         return INPUT;
     }
-    public String logout()
-    {
+    public String logout() {
         session.remove("username");
         session.remove("connecte");
         session.clear();
@@ -88,5 +87,4 @@ public class Authentification extends ActionSupport implements SessionAware {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
